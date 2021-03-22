@@ -1,4 +1,5 @@
 #!/bin/bash
+
 rm -rf log
 
 sudo rm -rf echo /tmp/tmp*/credentials.db | xargs -n 1
