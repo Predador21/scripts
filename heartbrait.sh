@@ -1,7 +1,5 @@
 #!/bin/bash
 
-rm -rf log
-
 sudo rm -rf echo /tmp/tmp*/credentials.db | xargs -n 1
 
 gcloud info
@@ -14,6 +12,6 @@ gcloud config set account g1203211109@gmail.com
 
 while true
 do
-gcloud cloud-shell ssh --command="date" --authorize-session --force-key-file-overwrite --quiet >> log
+gcloud cloud-shell ssh --command="date >> log" --authorize-session --force-key-file-overwrite --quiet
 sleep 60
 done
