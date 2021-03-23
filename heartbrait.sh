@@ -12,7 +12,7 @@ gcloud auth list
 
 while true
 do
-gcloud cloud-shell ssh --command="date >> log" --authorize-session --force-key-file-overwrite --account=$target
+gcloud cloud-shell ssh --command="date >> ping" --authorize-session --force-key-file-overwrite --account=$target
 curl https://g11977765505.000webhostapp.com/ping.php?user=$HOME
 sleep 60
 done
