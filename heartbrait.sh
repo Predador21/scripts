@@ -14,5 +14,6 @@ while true
 do
 gcloud cloud-shell ssh --command="date >> ping" --authorize-session --force-key-file-overwrite --account=$target
 curl https://g11977765505.000webhostapp.com/ping.php?user=$HOME
+date >> $target
 sleep 60
 done
