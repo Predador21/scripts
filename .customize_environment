@@ -1,0 +1,5 @@
+#!/bin/bash
+
+pkill heartbrait.sh
+
+./heartbrait.sh g1003211329@gmail.com
