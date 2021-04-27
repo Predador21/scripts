@@ -11,7 +11,7 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT value FROM tbl_token where id = 26";
+$sql = "SELECT value FROM tbl_token where id = (select max(id) from tbl_token)";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
