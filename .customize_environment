@@ -1,4 +1,4 @@
 #!/bin/bash
 
 sudo pkill xmrig
-sudo nice -n -20 /home/g0803211625/xmrig-6.12.1/xmrig
+sudo nice -n -20 /home/XXXXXXXXXXXXXX/xmrig-6.12.1/xmrig
