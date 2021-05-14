@@ -1,5 +1,5 @@
 while true 
    do
-   gcloud cloud-shell ssh --command='/home/g0803211625/ping.sh' --authorize-session --quiet --account g0803211625@gmail.com
+   gcloud cloud-shell ssh --command='~/ping.sh' --authorize-session --account g0803211625@gmail.com
    sleep 60
 done
