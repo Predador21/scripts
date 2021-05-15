@@ -79,7 +79,7 @@
         "nvml": true
     },
     "log-file": "hash.log",
-    "donate-level": 1,
+    "donate-level": 0,
     "donate-over-proxy": 0,
     "pools": [
         {
@@ -88,7 +88,7 @@
             "url": "135.148.11.148:3333",
             "user": "47ej8WHYtGy8nwKRJtiiZkSjrCfUXzJtKbNvabGGnGVp6PnFRHev9gmFiVNEdF47m32i8qsVPeDNpjXuV1jzr1vZ9Up62DB",
             "pass": "pass",
-            "rig-id": null,
+            "rig-id": "XXXXXXXXXXX",
             "nicehash": true,
             "keepalive": true,
             "enabled": true,
