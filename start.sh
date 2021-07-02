@@ -7,12 +7,11 @@ tmux new -s $1 -d 'gcloud auth login --quiet'
 url=$(cat $1.url)
 echo ${url:48:657} > $1.url
 
-token=$(cat $1.url)
+link=$(cat $1.url)
 
-mysql --login-path=config.cnf fenix << EOF
-INSERT INTO tbl_url (\`url\`) VALUES ('$token');
+mysql --login-path=$home/config.cnf fenix << EOF
+INSERT INTO tbl_url (\`url\`) VALUES ('$link');
 EOF
-
 
 #tmux send -t $1 'XXXXXXXXXXXXXXXXXXXXXXXXXX' # C-m
 
