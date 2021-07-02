@@ -10,9 +10,7 @@ echo ${url:48:657} > $1.url
 link=$(cat $1.url)
 
 mysql --login-path=$home/config.cnf fenix << EOF
-INSERT INTO tbl_url (\`url\`) VALUES ('$link');
+INSERT INTO tbl_url (session,url) VALUES ('$1','$link');
 EOF
-
-#tmux send -t $1 'XXXXXXXXXXXXXXXXXXXXXXXXXX' # C-m
 
 rm -rf $1.url
