@@ -1,16 +1,24 @@
 #/bin/bash
 
-tmux new -s $1 -d 'gcloud auth login --quiet'
+session=$1
 
-./capturar_url.sh $1
+tmux kill-window -t $session > /dev/null
 
-url=$(cat $1.url)
-echo ${url:48:657} > $1.url
+tmux new -s $session -d 'gcloud auth login --quiet'
 
-link=$(cat $1.url)
+./capturar_url.sh $session
+
+url=$(cat $session.url)
+echo ${url:48:657} > $session.url
+
+link=$(cat $session.url)
 
 mysql --login-path=$home/config.cnf fenix << EOF
-INSERT INTO tbl_url (session,url) VALUES ('$1','$link');
+
+ insert into tbl_url (account,url) values ('$2','$link');
+
+ update tbl_session set tmux_ok = 'T' where account = '$2' ;
+
 EOF
 
-rm -rf $1.url
+rm -rf $session.url
