@@ -1,9 +1,9 @@
 #!/bin/bash
 
-while read fingerprint session
+while read session account
 do
-    echo $fingerprint $session
+    echo $session $account
 
-    ./start.sh $fingerprint  $session
+    ./start.sh $session $account
 
-done < <(echo "SELECT fingerprint, session FROM tbl_session where tmux_ok = 'F'" | mysql --login-path=$home/config.cnf fenix -s)
+done < <(echo "select session, account from tbl_session where tmux_ok = 'F'" | mysql --login-path=$home/config.cnf fenix -s)
