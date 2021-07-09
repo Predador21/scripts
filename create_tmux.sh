@@ -5,5 +5,3 @@ read fingerprint session <<< $query
 
 echo $fingerprint
 echo $session
-
-./start.sh $session
