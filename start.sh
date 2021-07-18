@@ -15,7 +15,7 @@ link=$(cat $session.url)
 
 mysql --login-path=$home/config.cnf fenix << EOF
 
- insert into tbl_url (account,url) values ('$2','$link');
+ insert into tbl_url (session,account,url,status) values ('$session','$2','$link','1'); #STATUS 1 = INICIAL
 
  update tbl_session set status = 2 where account = '$2' ;
 
