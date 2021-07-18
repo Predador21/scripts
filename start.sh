@@ -17,7 +17,7 @@ mysql --login-path=$home/config.cnf fenix << EOF
 
  insert into tbl_url (account,url) values ('$2','$link');
 
- update tbl_session set tmux_ok = 'T' where account = '$2' ;
+ update tbl_session set status = 2 where account = '$2' ;
 
 EOF
 
