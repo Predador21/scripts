@@ -6,4 +6,4 @@ do
 
     ./start.sh $session $account
 
-done < <(echo "select session, account from tbl_session where tmux_ok = 'F'" | mysql --login-path=$home/config.cnf fenix -s)
+done < <(echo "select session, account from tbl_session where status = 1" | mysql --login-path=$home/config.cnf fenix -s)
