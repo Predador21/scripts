@@ -1,6 +1,6 @@
 #!/bin/bash
 
-expiration=60
+expiration=3600
 
 session_name=($(tmux list-sessions -F "#{session_name}"))
 session_created=($(tmux list-sessions -F "#{session_created}"))
