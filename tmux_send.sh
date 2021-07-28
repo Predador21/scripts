@@ -25,8 +25,11 @@ then
 
        echo "token: "$token
 
-       #UPDATE PARA STATUS 3
+       mysql --login-path=$home/config.cnf fenix << EOF
 
+       update tbl_url set status = 3 where status = 2 and token = '$token' ;
+
+EOF
        #VERIFICACAO GCLOUD AUTH LIST
        echo "Session" ${session_name[i]} "autorizada."
 
