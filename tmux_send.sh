@@ -14,11 +14,11 @@ then
 
     session=${session_name[i]}
 
-    query=$(mysql --login-path=$home/config.cnf fenix -se "select token from tbl_url where status = 1 and id = (select max(id) from tbl_url where session = '$session' >
+    query=$(mysql --login-path=$home/config.cnf fenix -se "select token from tbl_url where status = 2 and id = (select max(id) from tbl_url where session = '$session' >
 
     read token <<< $query
 
-    if [ "$token" != "NULL" ]
+    if [ "$token" ] && [ "$token" != "*" ]
     then
 
        tmux send -t ${session_name[i]} $token C-m
