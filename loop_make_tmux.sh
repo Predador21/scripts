@@ -2,6 +2,7 @@
 
 while read session account
 do
+    echo ""
     echo $session $account
 
     ./start.sh $session $account
