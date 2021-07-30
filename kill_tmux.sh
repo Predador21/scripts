@@ -13,21 +13,22 @@ do
  datetime=$(date '+%s')
  limite=$((datetime-expiration))
 
- if [[ ${session_name[i]} =~ "FENIX_" ]] && [ ${session_created[i]} -lt $limite ]
- then
-    tmux kill-window -t ${session_name[i]} > /dev/null
+ session=${session_name[i]}
 
-    session=${session_name[i]/FENIX_/}
+ if [[ $session =~ "fenix_" ]] && [ ${session_created[i]} -lt $limite ]
+ then
+
+    tmux kill-window -t $session > /dev/null
 
     mysql --login-path=$home/config.cnf fenix << EOF
 
-     update tbl_session set status = 9 where session = '$session' and status = 2 ;
-     
-     update tbl_url set status = 9 where session = '${session_name[i]}' and status = 1 ;     
+      update tbl_session set status = 9 where session = '$session' and status = 2 ;
+
+      update tbl_url set status = 9 where session = '$session' and status = 1 ;
 
 EOF
 
-    echo "Session" ${session_name[i]} "finalizada por time-out (9)."
+    echo "Session" $session "finalizada por time-out (9)."
  fi
 
   ((i++))
