@@ -7,27 +7,27 @@ i=0
 while [ $i -lt ${#session_name[@]} ]
 do
 
-if [[ ${session_name[i]} =~ "FENIX_" ]]
-then
-
-    #session=${session_name[i]/FENIX_/}
-
     session=${session_name[i]}
 
-    query=$(mysql --login-path=$home/config.cnf fenix -se "select token from tbl_url where status = 2 and id = (select max(id) from tbl_url where session = '$session' >
+if [[ $session =~ "fenix_" ]]
+then
+
+    query=$(mysql --login-path=$home/config.cnf fenix -se "select token from tbl_url where status = 2 and id = (select max(id) from tbl_url where session = '$session' )")
 
     read token <<< $query
 
     if [ "$token" ] && [ "$token" != "*" ]
     then
 
-       tmux send -t ${session_name[i]} $token C-m
+       tmux send -t $session $token C-m
 
        echo "token: "$token
 
        mysql --login-path=$home/config.cnf fenix << EOF
 
-       update tbl_url set status = 3 where status = 2 and token = '$token' ;
+         update tbl_session set status = 3 where session = '$session' and status = 2 ;
+
+         update tbl_url set status = 3 where token = '$token' and status = 2 ;
 
 EOF
        #VERIFICACAO GCLOUD AUTH LIST
