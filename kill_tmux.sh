@@ -22,6 +22,8 @@ do
     mysql --login-path=$home/config.cnf fenix << EOF
 
      update tbl_session set status = 9 where session = '$session' and status = 2 ;
+     
+     update tbl_url set status = 9 where session = '${session_name[i]}' and status = 1 ;     
 
 EOF
 
