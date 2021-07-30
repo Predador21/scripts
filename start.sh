@@ -1,8 +1,8 @@
 #/bin/bash
 
-session='FENIX_'$1
+session=$1
 
-tmux kill-window -t $session > /dev/null
+tmux kill-window -t $session 2>/dev/null
 
 tmux new -s $session -d 'gcloud auth login --quiet'
 
@@ -15,13 +15,13 @@ link=$(cat $session.url)
 
 mysql --login-path=$home/config.cnf fenix << EOF
 
- insert into tbl_url (session,account,url,status) values ('$session','$2','$link','1'); #STATUS 1 = INICIAL
+ insert into tbl_url (session,account,url,status) values ('$session','$2','$link','1');
 
  update tbl_session set status = 2 where account = '$2' ;
 
 #1 = SEM TMUX
 #2 = TMUX ABERTO COM URL CAPTURADA
-#4 = CONCLUIDO
+#3 = CONCLUIDO
 #9 = SESSION ENCERRADA - TIME OUT
 
 EOF
