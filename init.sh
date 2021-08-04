@@ -26,7 +26,12 @@
          --header 'Content-Type: application/json' \
          --compressed > $file
 
- status=$(jq '.metadata.state' $file)
+ status1=$(jq '.metadata.state' $file)
+ status2=$(jq '.response.environment.state' $file)
+ erro=$(jq '.error.details[0].code' $file)
 
- echo $status
+ echo $status1
+ echo $status2
+ echo $erro
 
+ rm -rf $file
