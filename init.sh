@@ -29,3 +29,4 @@
  status=$(jq '.metadata.state' $file)
 
  echo $status
+
