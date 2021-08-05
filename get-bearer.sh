@@ -13,4 +13,4 @@
  token=$(jq '.access_token' $file )
  rm -rf $file
 
- echo ${token//'"'/}
+ token=${token//'"'/}
