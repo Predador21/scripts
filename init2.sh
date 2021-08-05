@@ -13,6 +13,7 @@ do
  if [ $token == 'null' ] || [ $status1 == 'UNAUTHENTICATED' ]
  then
     source get-bearer.sh $1
+    echo 'Novo token gerado!'
  fi
 
  file='.'$(openssl rand -hex 12)
