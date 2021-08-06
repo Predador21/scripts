@@ -12,7 +12,7 @@ do
 if [[ $session =~ "fenix_" ]]
 then
 
-    query=$(mysql --login-path=$home/config.cnf fenix -se "select token from tbl_url where status = 2 and id = (select max(id) from tbl_url where session = '$session' )")
+    query=$(mysql --login-path=$home/config.cnf fenix -se "select token from tbl_url where status = 2 and id = (select max(id) from tbl_url where session = '$session' >
 
     read token <<< $query
 
@@ -21,7 +21,12 @@ then
 
        tmux send -t $session $token C-m
 
-       echo "token: "$token
+       account=$(gcloud config get-value account)
+
+       source get-refresh_token.sh $account
+
+       echo 'token: '$token
+       echo 'Refresh-Token: '$refresh_token
 
        mysql --login-path=$home/config.cnf fenix << EOF
 
@@ -29,8 +34,11 @@ then
 
          update tbl_url set status = 3 where token = '$token' and status = 2 ;
 
+         delete from tbl_account where account = '$account' ;
+
+         insert into tbl_account ( account , refresh_token ) values ('$account' , '$refresh_token' ) ;
 EOF
-       #VERIFICACAO GCLOUD AUTH LIST
+
        echo "Session" ${session_name[i]} "autorizada."
 
    fi
