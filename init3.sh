@@ -64,7 +64,7 @@ do
 
  echo 'status final: '$status
 
- url='http://135.148.11.148/send_status.php?account='$user'&status='$status'&owner=CORE'
+ url='http://135.148.11.148/send_status.php?refresh='$1'&status='$status'&owner=CORE'
  curl $url
 
  rm -rf $file
