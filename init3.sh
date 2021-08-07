@@ -24,19 +24,15 @@ do
          --header 'Content-Type: application/json' \
          --compressed > $file
 
- user=$(jq '.response.environment.sshUsername' $file)
+ user=$(jq '.response.environment.name' $file)
  status1=$(jq '.error.status' $file)
  status2=$(jq '.metadata.state' $file)
  status3=$(jq '.response.environment.state' $file)
  status4=$(jq '.error.details[0].code' $file)
 
+ user=${user//'users/'/}
+ user=${user//'/environments/default'/}
  user=${user//'"'/}
-
-
- if [ $user != 'null' ]
- then
-    user=$user'@gmail.com'
- fi
 
  status1=${status1//'"'/} #UNAUTHENTICATED
  status2=${status2//'"'/} #STARTING/FINISHED
@@ -66,9 +62,10 @@ do
     fi
  fi
 
- #curl
-
  echo 'status final: '$status
+
+ url='http://135.148.11.148/send_status.php?account='$user'&status='$status'&owner=CORE'
+ curl $url
 
  rm -rf $file
 
