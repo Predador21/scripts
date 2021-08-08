@@ -11,6 +11,7 @@
          --data refresh_token=$1 > $file
 
  token=$(jq '.access_token' $file )
- rm -rf $file
 
  token=${token//'"'/}
+
+ rm -rf $file
