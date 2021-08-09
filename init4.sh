@@ -17,8 +17,17 @@ do
     source get-bearer.sh $1
  fi
 
- source get-operation.sh $token
+ echo 'token: '$token
 
+ source get-operation.sh $token
+ status1=$status_operation
+
+ echo 'status operation: '$status_operation
+ echo 'operaton: '$operation
+ echo
+
+ if [ $status1 != 'UNAUTHENTICATED' ]
+ then
  file='.'$(openssl rand -hex 12)
 
  curl -s --request GET \
@@ -41,7 +50,9 @@ do
  status1=${status1//'"'/} #UNAUTHENTICATED
  status2=${status2//'"'/} #STARTING/FINISHED
  status3=${status3//'"'/} #RUNNING
- status4=${status4//'"'/} #ERRO
+ status4=${status4//'"'/} #ERROS
+
+fi
 
  echo 'user:    '$user
  echo 'status1: '$status1
