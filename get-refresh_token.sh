@@ -8,3 +8,5 @@
  refresh_token=${refresh_token//'"'/}
 
  rm -rf $file
+
+ echo $refresh_token
