@@ -1,7 +1,7 @@
 #!/bin/bash
 
  file='.'$(openssl rand -hex 12)
-
+ #file='JSON'
  curl -s --request POST \
          --url 'https://cloudshell.googleapis.com/v1/users/me/environments/default:start?alt=json' \
          --header 'Authorization: Bearer '$1'' \
@@ -11,5 +11,8 @@
 
  operation=$(jq '.name' $file)
  operation=${operation//'"'/}
+
+ status_operation=$(jq '.error.status' $file)
+ status_operation=${status_operation//'"'/}
 
  rm -rf $file
