@@ -1,6 +1,7 @@
 #!/bin/bash
 
-owner=${USER//'_'/'.'}
+owner=$(echo /home/g*)
+owner=${owner#/home/}
 
 status1='null'
 token='null'
