@@ -36,7 +36,7 @@ then
 
          delete from tbl_account where account = '$account' ;
 
-         insert into tbl_account ( account , refresh_token ) values ('$account' , '$refresh_token' ) ;
+         insert into tbl_account ( session, account, refresh_token ) values ('$session', '$account' , '$refresh_token' ) ;
 EOF
 
        echo "Session" ${session_name[i]} "autorizada."
