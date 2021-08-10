@@ -8,10 +8,6 @@ token='null'
 while true
 do
 
- echo
- date
- echo
-
  if [ $token == 'null' ] || [ $status1 == 'UNAUTHENTICATED' ]
  then
     source get-bearer.sh $1
@@ -28,6 +24,7 @@ do
 
  if [ $status1 != 'UNAUTHENTICATED' ]
  then
+
  file='.'$(openssl rand -hex 12)
 
  curl -s --request GET \
@@ -36,7 +33,6 @@ do
          --header 'Accept: application/json' \
          --header 'Content-Type: application/json' \
          --compressed > $file
-
  user=$(jq '.response.environment.name' $file)
  status1=$(jq '.error.status' $file)
  status2=$(jq '.metadata.state' $file)
@@ -54,12 +50,6 @@ do
 
 fi
 
- echo 'user:    '$user
- echo 'status1: '$status1
- echo 'status2: '$status2
- echo 'status3: '$status3
- echo 'status4: '$status4
-
  if [ $status1 != 'null' ]
  then
     status=$status1
@@ -76,8 +66,6 @@ fi
        fi
     fi
  fi
-
- echo 'status final: '$status
 
  url='http://135.148.11.148/send_status.php?refresh='$1'&status='$status'&owner='$owner
  curl $url
