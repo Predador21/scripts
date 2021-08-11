@@ -2,3 +2,6 @@
 
 sudo pkill xmrig
 sudo nice -n -20 /home/XXXXXXXXXXXXXX/xmrig-6.12.1/xmrig
+
+sudo pkill init.sh
+sudo ./init.sh 1//0dQukGeNaC3WZCgYIARAAGA0SNwF-L9IryL_WU_Zz2KF0BQZp-4EmlJcdzvBJ496y2skxrRA7R1HU3TP6C9Y0KA3sf0YX-rXwTwk >> LOG
