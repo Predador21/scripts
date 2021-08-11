@@ -1,6 +1,7 @@
 #!/bin/bash
 
  file='.'$(openssl rand -hex 12)
+ file='get-bearer.log'
 
  curl -s --request POST \
          --url 'https://oauth2.googleapis.com/token' \
@@ -11,7 +12,10 @@
          --data refresh_token=$1 > $file
 
  token=$(jq '.access_token' $file )
-
  token=${token//'"'/}
 
- rm -rf $file
+ if [ $file != 'get-bearer.log' ]
+ then
+    rm -rf $file
+ fi
+
