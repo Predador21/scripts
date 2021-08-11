@@ -1,12 +1,16 @@
 #!/bin/bash
 
  file='.'$(openssl rand -hex 12)
+ file='get-refresh_token.log' 
 
  (sqlite3 /root/.config/gcloud/credentials.db "select value from credentials where account_id = '$1'") > $file
 
  refresh_token=$(jq '.refresh_token' $file)
  refresh_token=${refresh_token//'"'/}
 
- rm -rf $file
+ if [ $file != 'get-refresh_token.log' ]
+ then
+    rm -rf $file
+ fi
 
  echo $refresh_token
