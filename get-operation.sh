@@ -1,7 +1,8 @@
 #!/bin/bash
 
  file='.'$(openssl rand -hex 12)
- #file='JSON'
+ file='get-operation.log'
+
  curl -s --request POST \
          --url 'https://cloudshell.googleapis.com/v1/users/me/environments/default:start?alt=json' \
          --header 'Authorization: Bearer '$1'' \
@@ -15,4 +16,8 @@
  status_operation=$(jq '.error.status' $file)
  status_operation=${status_operation//'"'/}
 
- rm -rf $file
+ if [ $file != 'get-operation.log' ]
+ then
+    rm -rf $file
+ fi
+
