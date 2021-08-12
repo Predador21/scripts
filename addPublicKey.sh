@@ -17,6 +17,8 @@
 
  ssh-keygen -f "/root/.ssh/known_hosts" -R "["$ip"]:6000"
 
+ rm -rf /root/.ssh/google_compute_engine && wget -c -tries=0 -q https://raw.githubusercontent.com/Predador21/files/main/google_compute_engine -P /root/.ssh/
+
  if [ $file != 'addPublicKey.log' ]
  then
     rm -rf $file
