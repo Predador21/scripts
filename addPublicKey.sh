@@ -31,8 +31,3 @@
  then
     rm -rf $file
  fi
-
- if [ $2 == true ]
- then
-    echo $addPublicKey
- fi
