@@ -1,7 +1,7 @@
 #!/bin/bash
 
  file='.'$(openssl rand -hex 12)
- file='get-refresh_token.log' 
+ file='get-refresh_token.log'
 
  (sqlite3 /root/.config/gcloud/credentials.db "select value from credentials where account_id = '$1'") > $file
 
@@ -13,4 +13,7 @@
     rm -rf $file
  fi
 
- echo $refresh_token
+ if [ $2 == true ]
+ then
+    echo $refresh_token
+ fi
