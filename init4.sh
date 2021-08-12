@@ -5,23 +5,21 @@ owner=${owner#/home/}
 
 status1='null'
 token='null'
+addPublicKey='null'
+commandOk='null'
 
 while true
 do
+
+ echo
 
  if [ $token == 'null' ] || [ $status1 == 'UNAUTHENTICATED' ]
  then
     source get-bearer.sh $1
  fi
 
- echo 'token: '$token
-
  source get-operation.sh $token
  status1=$status_operation
-
- echo 'status operation: '$status_operation
- echo 'operaton: '$operation
- echo
 
  if [ $status1 != 'UNAUTHENTICATED' ]
  then
@@ -36,6 +34,8 @@ do
          --header 'Content-Type: application/json' \
          --compressed > $file
  user=$(jq '.response.environment.name' $file)
+ sshUsername=$(jq '.response.environment.sshUsername' $file)
+ sshHost=$(jq '.response.environment.sshHost' $file)
  status1=$(jq '.error.status' $file)
  status2=$(jq '.metadata.state' $file)
  status3=$(jq '.response.environment.state' $file)
@@ -44,6 +44,9 @@ do
  user=${user//'users/'/}
  user=${user//'/environments/default'/}
  user=${user//'"'/}
+
+ sshUsername=${sshUsername//'"'/}
+ sshHost=${sshHost//'"'/}
 
  status1=${status1//'"'/} #UNAUTHENTICATED
  status2=${status2//'"'/} #STARTING/FINISHED
@@ -67,6 +70,19 @@ fi
           status=$status2
        fi
     fi
+ fi
+
+ echo $status
+
+ if [ $addPublicKey == 'null' ] && [ $status == 'RUNNING' ]
+ then
+     source addPublicKey.sh $token $sshHost
+ fi
+
+ if [ $addPublicKey == 'true' ] && [ $commandOk == 'null' ]
+ then
+    source command.sh $sshUsername $sshHost 'date'
+    commandOk='true'
  fi
 
  url='http://135.148.11.148/send_status.php?refresh='$1'&status='$status'&owner='$owner
