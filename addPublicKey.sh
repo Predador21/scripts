@@ -1,8 +1,6 @@
 #!/bin/bash
 
- user=$3
- ip=$4
- command=$5
+ ip=$3
 
  file='.'$(openssl rand -hex 12)
  file='addPublicKey.log'
@@ -17,8 +15,7 @@
  addPublicKey=$(jq '.done' $file)
  addPublicKey=${addPublicKey//'"'/}
 
-ssh-keygen -f "/root/.ssh/known_hosts" -R "["$ip"]:6000"
-/usr/bin/ssh -T -p 6000 -i /root/.ssh/google_compute_engine -o StrictHostKeyChecking=no $user@$ip -- $command
+ ssh-keygen -f "/root/.ssh/known_hosts" -R "["$ip"]:6000"
 
  if [ $file != 'addPublicKey.log' ]
  then
