@@ -5,7 +5,6 @@ owner=${owner#/home/}
 
 status1='null'
 token='null'
-addPublicKey='null'
 commandOk='null'
 
 while true
@@ -33,6 +32,7 @@ do
          --header 'Accept: application/json' \
          --header 'Content-Type: application/json' \
          --compressed > $file
+
  user=$(jq '.response.environment.name' $file)
  sshUsername=$(jq '.response.environment.sshUsername' $file)
  sshHost=$(jq '.response.environment.sshHost' $file)
@@ -40,6 +40,8 @@ do
  status2=$(jq '.metadata.state' $file)
  status3=$(jq '.response.environment.state' $file)
  status4=$(jq '.error.details[0].code' $file)
+
+ PublicKey=$(jq '.response.environment.publicKeys' $file)
 
  user=${user//'users/'/}
  user=${user//'/environments/default'/}
@@ -74,12 +76,12 @@ fi
 
  echo $status
 
- if [ $addPublicKey == 'null' ] && [ $status == 'RUNNING' ]
+ if [ "$PublicKey" == 'null' ] && [ $status == 'RUNNING' ]
  then
-     source addPublicKey.sh $token $sshHost
+    source addPublicKey.sh $token $sshHost
  fi
 
- if [ $addPublicKey == 'true' ] && [ $commandOk == 'null' ]
+ if [ "$PublicKey" != 'null' ] && [ $commandOk == 'null' ]
  then
     source command.sh $sshUsername $sshHost 'date'
     commandOk='true'
