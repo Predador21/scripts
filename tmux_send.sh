@@ -12,7 +12,7 @@ do
 if [[ $session =~ "fenix_" ]]
 then
 
-    query=$(mysql --login-path=$home/config.cnf fenix -se "select token from tbl_url where status = 2 and id = (select max(id) from tbl_url where session = '$session' >
+    query=$(mysql --login-path=$home/config.cnf fenix -se "select token from tbl_url where status = 2 and id = (select max(id) from tbl_url where session = '$session' )")
 
     read token <<< $query
 
