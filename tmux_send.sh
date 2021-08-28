@@ -19,12 +19,19 @@ then
     if [ "$token" ] && [ "$token" != "*" ]
     then
 
+       echo 'Enviando token...'
+
        tmux send -t $session $token C-m
+
+       sleep 2
+
+       echo 'Token enviado!'
 
        account=$(gcloud config get-value account)
 
        source get-refresh_token.sh $account
 
+       echo 'Conta: '$account
        echo 'token: '$token
        echo 'Refresh-Token: '$refresh_token
 
