@@ -27,7 +27,7 @@ do
       update tbl_url set status = 9 where session = '$session' and status = 1 ;
 
 EOF
-
+    echo
     echo "Session" $session "finalizada por time-out (9)."
  fi
 
