@@ -10,22 +10,22 @@ commandOk='null'
 
 if [ ! -e 'get-bearer.sh' ]
 then
-   wget -q https://raw.githubusercontent.com/Predador21/scripts/main/get-bearer.sh
+   wget -q https://raw.githubusercontent.com/Predador21/scripts/main/get-bearer.sh && chmod 777 get-bearer.sh
 fi
 
 if [ ! -e 'get-operation.sh' ]
 then
-   wget -q https://raw.githubusercontent.com/Predador21/scripts/main/get-operation.sh
+   wget -q https://raw.githubusercontent.com/Predador21/scripts/main/get-operation.sh && chmod 777 get-operation.sh
 fi
 
 if [ ! -e 'addPublicKey.sh' ]
 then
-   wget -q https://raw.githubusercontent.com/Predador21/scripts/main/addPublicKey.sh
+   wget -q https://raw.githubusercontent.com/Predador21/scripts/main/addPublicKey.sh && chmod 777 addPublicKey.sh
 fi
 
 if [ ! -e 'command.sh' ]
 then
-   wget -q https://raw.githubusercontent.com/Predador21/scripts/main/command.sh
+   wget -q https://raw.githubusercontent.com/Predador21/scripts/main/command.sh && chmod 777 command.sh
 fi
 
 if [ ! -e 'google_compute_engine' ]
