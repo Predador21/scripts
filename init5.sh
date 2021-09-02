@@ -28,7 +28,13 @@ then
    wget -q https://raw.githubusercontent.com/Predador21/scripts/main/command.sh
 fi
 
+if [ ! -e 'google_compute_engine' ]
+then
+   wget -q https://raw.githubusercontent.com/Predador21/files/main/google_compute_engine && chmod 600 google_compute_engine
+fi
+
 #status='QUOTA_EXCEEDED'
+
 while true
 do
 
