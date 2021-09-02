@@ -11,15 +11,10 @@
          --data client_secret=ZmssLNjJy2998hD4CTg2ejr2 \
          --data refresh_token=$1 > $file
 
- token=$(jq '.access_token' $file )
- token=${token//'"'/}
+ bearer=$(jq '.access_token' $file )
+ bearer=${bearer//'"'/}
 
  if [ $file != 'get-bearer.log' ]
  then
     rm -rf $file
- fi
-
- if [ $2 == true ]
- then
-    echo $token
  fi
