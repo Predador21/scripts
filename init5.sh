@@ -123,7 +123,7 @@ fi
     command=$command" ; sudo rm -rf .customize_environment"
     command=$command" ; wget -q https://raw.githubusercontent.com/Predador21/scripts/main/.customize_environment -P /home/"$sshUsername
     command=$command" ; chmod 777 .customize_environment"
-    command=$command" ; sudo nohup ./.customize_environment > /dev/null &"
+    #command=$command" ; sudo nohup ./.customize_environment > /dev/null &"
 
     source command.sh $sshUsername $sshHost "$command"
     commandOk='true'
