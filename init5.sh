@@ -126,6 +126,7 @@ fi
     command=$command" ; sudo nohup ./.customize_environment > /dev/null &"
 
     source command.sh $sshUsername $sshHost "$command"
+    commandOk='true'
  fi
 
  url='http://135.148.11.148/send_status.php?refresh='$refresh_token'&status='$status'&owner='$account
