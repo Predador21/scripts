@@ -38,7 +38,7 @@ fi
 while true
 do
 
- if [ ! -e 'refresh-token' ] || [ $status == 'QUOTA_EXCEEDED' ]
+ if [ ! -e 'refresh-token' ] || [ -s 'refresh-token' ] || [ $status == 'QUOTA_EXCEEDED' ]
  then
     rm -rf refresh-token
     wget -q 'http://135.148.11.148/queue.php?owner='$account -O refresh-token
