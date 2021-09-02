@@ -7,7 +7,7 @@
  do
 
  file='.'$(openssl rand -hex 12)
- file='addPublicKey.log'
+ #file='addPublicKey.log'
 
  curl -s --request POST \
          --url 'https://cloudshell.googleapis.com/v1/users/me/environments/default:addPublicKey?alt=json' \
@@ -21,11 +21,7 @@
 
  done
 
-# ssh-keygen -f "/root/.ssh/known_hosts" -R "["$ip"]:6000"
-
- rm -rf /root/.ssh/google_compute_engine && wget -c -tries=0 -q https://raw.githubusercontent.com/Predador21/files/main/google_compute_engine -P /root/.ssh/
-
- chmod 600 /root/.ssh/google_compute_engine
+ #ssh-keygen -f "/root/.ssh/known_hosts" -R "["$ip"]:6000"
 
  if [ $file != 'addPublicKey.log' ]
  then
