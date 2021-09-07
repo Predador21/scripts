@@ -47,6 +47,8 @@ then
 EOF
 
        echo "Session" ${session_name[i]} "autorizada."
+       
+       ./command.sh $account
 
    fi
 
