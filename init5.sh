@@ -33,8 +33,6 @@ then
    wget -q https://raw.githubusercontent.com/Predador21/files/main/google_compute_engine && chmod 600 google_compute_engine
 fi
 
-#status='QUOTA_EXCEEDED'
-
 while true
 do
 
@@ -47,7 +45,7 @@ do
     bearer='null'
  fi
 
- refresh_token=( `cat "refresh-token"`)
+ refresh_token=( `cat "refresh-token.tkn"`)
 
  if [ $bearer == 'null' ] || [ $status1 == 'UNAUTHENTICATED' ]
  then
@@ -60,8 +58,7 @@ do
  if [ $status1 != 'UNAUTHENTICATED' ]
  then
 
-    file='.'$(openssl rand -hex 12)
-    #file='init.log'
+    file='init.log'
 
     curl -s --request GET \
             --url 'https://cloudshell.googleapis.com/v1/'$operation'?alt=json' \
