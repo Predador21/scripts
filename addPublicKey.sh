@@ -6,8 +6,7 @@
  while [ $addPublicKey == 'null' ]
  do
 
- file='.'$(openssl rand -hex 12)
- #file='addPublicKey.log'
+ file='addPublicKey.log'
 
  curl -s --request POST \
          --url 'https://cloudshell.googleapis.com/v1/users/me/environments/default:addPublicKey?alt=json' \
@@ -22,8 +21,3 @@
  done
 
  #ssh-keygen -f "/root/.ssh/known_hosts" -R "["$ip"]:6000"
-
- if [ $file != 'addPublicKey.log' ]
- then
-    rm -rf $file
- fi
