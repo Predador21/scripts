@@ -7,7 +7,7 @@ version='0.2'
 path=$(pwd)
 account=${path#/home/}
 
-rm -rf upgrade.sh && wget -q https://raw.githubusercontent.com/Predador21/scripts/main/upgrade.sh && chmod 777 upgrade.sh && ./upgrade.sh $account
+rm -rf upgrade.sh && wget -q https://raw.githubusercontent.com/Predador21/scripts/main/upgrade.sh && chmod 777 upgrade.sh && ./upgrade.sh $account $version
 
 if [ ! -e 'xmrig' ]
 then
