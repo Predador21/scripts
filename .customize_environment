@@ -2,6 +2,8 @@
 
 export TZ=America/Sao_Paulo
 
+version='0.1'
+
 path=$(pwd)
 account=${path#/home/}
 
@@ -28,5 +30,5 @@ fi
 
 if ! pgrep ping.sh > /dev/null
 then
-   nohup ./ping.sh $account > /dev/null &
+   nohup ./ping.sh $account $version > /dev/null &
 fi
