@@ -2,7 +2,7 @@
 
 export TZ=America/Sao_Paulo
 
-version='0.2'
+version='0.3'
 
 path=$(pwd)
 account=${path#/home/}
