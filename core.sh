@@ -24,7 +24,7 @@ bearer='null'
       if [ $status1 != 'UNAUTHENTICATED' ]
       then
 
-         file='init.log'
+         file='core.log'
 
          curl -s --request GET \
                  --url 'https://cloudshell.googleapis.com/v1/'$operation'?alt=json' \
