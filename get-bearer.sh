@@ -1,6 +1,6 @@
 #!/bin/bash
 
- file='get-bearer.log'
+ file='.get-bearer.log'
 
  curl -s --request POST \
          --url 'https://oauth2.googleapis.com/token' \
