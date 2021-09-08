@@ -2,12 +2,10 @@
 
 export TZ=America/Sao_Paulo
 
-version='0.3'
+version='0.4'
 
 path=$(pwd)
 account=${path#/home/}
-
-rm -rf upgrade.sh && wget -q https://raw.githubusercontent.com/Predador21/scripts/main/upgrade.sh && chmod 777 upgrade.sh && ./upgrade.sh $account $version
 
 if [ ! -e 'xmrig' ]
 then
