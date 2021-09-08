@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#while true
-#do
+while true
+do
 
 while read account refresh_token
 do
@@ -51,7 +51,7 @@ bearer='null'
          status3=${status3//'"'/} #RUNNING
          status4=${status4//'"'/} #ERROS
 
-      fi      
+      fi
       
       if [ $status1 != 'null' ]
       then
@@ -84,6 +84,6 @@ bearer='null'
 
   done
 
-done < <(echo "select account , refresh_token from tbl_account where ativo = 'T'" | mysql --login-path=$home/config.cnf fenix -s)
+done < <(echo "select account , refresh_token from tbl_account where status <> 'TOS_VIOLATION' " | mysql --login-path=$home/config.cnf fenix -s)
 
-#done
+done
