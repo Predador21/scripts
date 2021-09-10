@@ -7,7 +7,9 @@ file='.'${0##*/} && file=${file%.*}'.tmp'
 
 while true
 do
-
+   
+   status1='null'
+    
    curl -s 'http://135.148.11.148/queue.php?owner='$user > $file
 
    account=$(jq '.account' $file)
