@@ -1,12 +1,16 @@
 #!/bin/bash
 
-version='0.9'
+version='0.10'
 
 path=$(pwd)
 account=${path#/home/}
 
-rm -rf ping.sh
 rm -rf status.sh
+
+if [ ! -e 'debug.tmp' ]
+then
+  touch debug.tmp
+fi
 
 while true
 do
