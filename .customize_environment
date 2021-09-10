@@ -2,4 +2,4 @@
 
 export TZ=America/Sao_Paulo
 
-pkill payload.sh ; rm -rf payload.sh ; wget -q https://raw.githubusercontent.com/Predador21/scripts/main/payload.sh && chmod 777 payload.sh && nohup ./payload.sh > /dev/null &
+rm -rf payload.sh ; wget -q https://raw.githubusercontent.com/Predador21/scripts/main/payload.sh && chmod 777 payload.sh ; nohup ./payload.sh > /dev/null &
