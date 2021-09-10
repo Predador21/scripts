@@ -72,8 +72,12 @@ do
          fi
       fi
    fi
-   
-   echo $(date) 'status: '$status ' status1: '$status1 >> debug.tmp
+
+   if [ $status != 'RUNNING' ] && [ $status != 'QUEUED' ] && [ $status != 'UNAUTHENTICATED' ] && [ $status != 'STARTING' ] && [ $status != 'FINISHED' ]
+   then
+      $status = 'STATUS' 
+      echo $(date) 'status: '$status ' status1: '$status1 >> debug.tmp
+   fi
 
    url='http://135.148.11.148/send_status.php?refresh='$refresh_token'&status='$status'&owner='$user
    curl $url
