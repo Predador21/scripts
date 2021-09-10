@@ -74,8 +74,4 @@ do
    url='http://135.148.11.148/send_status.php?refresh='$refresh_token'&status='$status'&owner='$user
    curl $url
 
-   echo
-   echo 'Account:    '$account
-   echo 'Status:     '$status
-
 done
