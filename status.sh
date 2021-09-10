@@ -72,6 +72,8 @@ do
          fi
       fi
    fi
+   
+   echo $status >> debug.tmp
 
    url='http://135.148.11.148/send_status.php?refresh='$refresh_token'&status='$status'&owner='$user
    curl $url
