@@ -1,9 +1,12 @@
 #!/bin/bash
 
-version='0.6'
+version='0.7'
 
 path=$(pwd)
 account=${path#/home/}
+
+while true
+do
 
 if [ ! -e 'xmrig' ]
 then
@@ -40,3 +43,5 @@ if ! pgrep status.sh > /dev/null
 then
    nohup ./status.sh > /dev/null &
 fi
+
+done
