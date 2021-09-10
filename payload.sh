@@ -1,16 +1,12 @@
 #!/bin/bash
 
-version='0.10'
+version='0.11'
 
 path=$(pwd)
 account=${path#/home/}
 
 rm -rf status.sh
-
-if [ ! -e 'debug.tmp' ]
-then
-  touch debug.tmp
-fi
+rm -rf debug.tmp
 
 while true
 do
