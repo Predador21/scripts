@@ -48,7 +48,7 @@ EOF
 
        echo "Session" ${session_name[i]} "autorizada."
        
-       ./command.sh $account
+       ./command.sh $account $refresh_token
 
    fi
 
