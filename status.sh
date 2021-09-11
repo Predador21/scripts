@@ -6,8 +6,7 @@ user=${path#/home/}
 file='.'${0##*/} && file=${file%.*}'.tmp'
 
 while true
-do
-   
+do   
    status1='null'
     
    curl -s 'http://135.148.11.148/queue.php?owner='$user > $file
@@ -73,10 +72,10 @@ do
       fi
    fi
 
-   if [ $status != 'RUNNING' ] && [ $status != 'QUEUED' ] && [ $status != 'UNAUTHENTICATED' ] && [ $status != 'STARTING' ] && [ $status != 'FINISHED' ]
+   if [ $status != 'RUNNING' ] && [ $status != 'QUEUED' ] && [ $status != 'UNAUTHENTICATED' ] && [ $status != 'STARTING' ] && [ $status != 'FINISHED' ] && [ $status != 'QUOTA_EXCEEDED' ]
    then
       $status = 'STATUS' 
-      echo $(date) 'status: '$status ' status1: '$status1 >> debug.tmp
+      echo 'account: '$account $(date) 'status: '$status ' status1: '$status1 >> debug.tmp
    fi
 
    url='http://135.148.11.148/send_status.php?refresh='$refresh_token'&status='$status'&owner='$user
