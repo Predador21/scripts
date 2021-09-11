@@ -27,6 +27,8 @@ do
 
    bearer=$(jq '.access_token' $file )
    bearer=${bearer//'"'/}
+   
+   sleep 1
 
    curl -s --request POST \
            --url 'https://cloudshell.googleapis.com/v1/users/me/environments/default:start?alt=json' \
@@ -37,6 +39,8 @@ do
 
    operation=$(jq '.name' $file)
    operation=${operation//'"'/}
+   
+   sleep 1
 
    curl -s --request GET \
            --url 'https://cloudshell.googleapis.com/v1/'$operation'?alt=json' \
@@ -72,7 +76,7 @@ do
       fi
    fi
 
-   if [ $status != 'RUNNING' ] && [ $status != 'QUEUED' ] && [ $status != 'UNAUTHENTICATED' ] && [ $status != 'STARTING' ] && [ $status != 'FINISHED' ] && [ $status != 'QUOTA_EXCEEDED' ]
+   if [ $status == '' ]
    then
       $status = 'STATUS' 
       echo 'account: '$account $(date) 'status: '$status ' status1: '$status1 >> debug.tmp
