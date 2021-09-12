@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version='0.15'
+version='0.16'
 
 path=$(pwd)
 account=${path#/home/}
