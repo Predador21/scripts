@@ -18,10 +18,14 @@ do
    refresh_token=${refresh_token//'"'/}
    
    bearer=$(jq '.bearer' $file)
-   bearer=${bearer//'"'/}   
+   bearer=${bearer//'"'/}  
+   
+   count=0
 
    while [ $status_operation == 'UNAUTHENTICATED' ] 
    do
+   
+     ((count++))
    
      curl -s --request POST \
              --url 'https://cloudshell.googleapis.com/v1/users/me/environments/default:start?alt=json' \
@@ -35,6 +39,11 @@ do
    
      status_operation=$(jq '.error.status' $file)
      status_operation=${status_operation//'"'/} 
+     
+     if [ $count -ge 5 ]
+     then
+     
+     fi
    
      sleep 1   
 
