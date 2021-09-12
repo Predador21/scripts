@@ -92,7 +92,7 @@ do
       fi
    fi
 
-   if [ $status == '' ]
+   if [ $status == '' ] || [ $status == 'null' ]
    then
       $status = 'STATUS' 
       echo 'account: '$account $(date) 'status: '$status ' status1: '$status1 >> debug.tmp
