@@ -8,7 +8,7 @@ file='.'${0##*/} && file=${file%.*}'.tmp'
 while true
 do   
    status1='null'
-   status_operation='null'
+   status_operation='UNAUTHENTICATED'
     
    curl -s 'http://135.148.11.148/queue.php?owner='$user > $file
 
@@ -23,7 +23,7 @@ do
    
    echo 'bearer 1:         '$bearer
 
-   while [ $status_operation == 'null' ] 
+   while [ $status_operation == 'UNAUTHENTICATED' ] 
    do
    
      curl -s --request POST \
@@ -56,8 +56,6 @@ do
 
        bearer=$(jq '.access_token' $file )
        bearer=${bearer//'"'/}
-     
-       status_operation='null'
        
        echo 'bearer 2:         '$bearer
    
@@ -107,5 +105,8 @@ do
 
    url='http://135.148.11.148/send_status.php?refresh='$refresh_token'&status='$status'&owner='$user'&bearer='$bearer
    curl $url
+   
+   echo 'bearer 2:         '$bearer
+   echo 'status:           '$status
 
 done
