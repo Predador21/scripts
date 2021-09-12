@@ -20,6 +20,8 @@ do
    
    bearer=$(jq '.bearer' $file)
    bearer=${bearer//'"'/}   
+   
+   echo 'bearer 1:         '$bearer
 
    while [ $status_operation == 'null' ] 
    do
@@ -38,6 +40,8 @@ do
      status_operation=${status_operation//'"'/} 
    
      sleep 1   
+     
+     echo 'status_operation: '$status_operation
 
      if [ $status_operation == 'UNAUTHENTICATED' ]
      then
@@ -54,6 +58,8 @@ do
        bearer=${bearer//'"'/}
      
        status_operation='null'
+       
+       echo 'bearer 2:         '$bearer
    
      fi   
    
