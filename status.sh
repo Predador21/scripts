@@ -25,7 +25,7 @@ do
    while [ $status_operation == 'UNAUTHENTICATED' ] 
    do
    
-     ((count++))
+     count=$((count+1))
    
      curl -s --request POST \
              --url 'https://cloudshell.googleapis.com/v1/users/me/environments/default:start?alt=json' \
@@ -40,12 +40,12 @@ do
      status_operation=$(jq '.error.status' $file)
      status_operation=${status_operation//'"'/} 
      
-     if [ $count -ge 5 ]
-     then
+     sleep 1      
      
+     if [ $count -ge 10 ]
+     then
+        break
      fi
-   
-     sleep 1   
 
      if [ $status_operation == 'UNAUTHENTICATED' ]
      then
