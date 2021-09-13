@@ -7,6 +7,8 @@ command="[ ! -e '.customize_environment' ] && ( wget -q https://raw.githubuserco
 
 gcloud cloud-shell ssh --account=$1 --command="$command" --authorize-session --force-key-file-overwrite --ssh-flag='-n' --quiet
 
+rm -rf /root/.config/gcloud/mysql.sql ; mysqldump --defaults-file=/root/make_gmail/config.cnf fenix > /root/.config/gcloud/mysql.sql
+
 rm -rf ~/backup.zip ; zip -r -q ~/backup.zip /root/.config/gcloud/
 
 gcloud cloud-shell scp localhost:/root/backup.zip cloudshell:~/ --account=$1 --force-key-file-overwrite
