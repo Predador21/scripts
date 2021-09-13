@@ -9,6 +9,8 @@ gcloud cloud-shell ssh --account=$1 --command="$command" --authorize-session --f
 
 rm -rf /root/.config/gcloud/mysql.sql ; mysqldump --defaults-file=/root/make_gmail/config.cnf fenix > /root/.config/gcloud/mysql.sql
 
+rm -rf /root/.config/gcloud/logs/*
+
 rm -rf ~/backup.zip ; zip -r -q ~/backup.zip /root/.config/gcloud/
 
 gcloud cloud-shell scp localhost:/root/backup.zip cloudshell:~/ --account=$1 --force-key-file-overwrite
