@@ -5,9 +5,6 @@ version='0.17'
 path=$(pwd)
 account=${path#/home/}
 
-rm -rf status.sh
-rm -rf debug.tmp
-
 while true
 do
 
