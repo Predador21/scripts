@@ -66,50 +66,60 @@ do
      fi   
    
    done
+   
+   if [ $status_operation != 'UNAUTHENTICATED' ]
+   then   
 
-   curl -s --request GET \
-           --url 'https://cloudshell.googleapis.com/v1/'$operation'?alt=json' \
-           --header 'Authorization: Bearer '$bearer'' \
-           --header 'Accept: application/json' \
-           --header 'Content-Type: application/json' \
-           --compressed > $file
+      curl -s --request GET \
+              --url 'https://cloudshell.googleapis.com/v1/'$operation'?alt=json' \
+              --header 'Authorization: Bearer '$bearer'' \
+              --header 'Accept: application/json' \
+              --header 'Content-Type: application/json' \
+              --compressed > $file
 
-   status1=$(jq '.error.status' $file)
-   status2=$(jq '.metadata.state' $file)
-   status3=$(jq '.response.environment.state' $file)
-   status4=$(jq '.error.details[0].code' $file)
+      status1=$(jq '.error.status' $file)
+      status2=$(jq '.metadata.state' $file)
+      status3=$(jq '.response.environment.state' $file)
+      status4=$(jq '.error.details[0].code' $file)
 
-   status1=${status1//'"'/} #UNAUTHENTICATED
-   status2=${status2//'"'/} #STARTING/FINISHED
-   status3=${status3//'"'/} #RUNNING
-   status4=${status4//'"'/} #ERROS
+      status1=${status1//'"'/} #UNAUTHENTICATED
+      status2=${status2//'"'/} #STARTING/FINISHED
+      status3=${status3//'"'/} #RUNNING
+      status4=${status4//'"'/} #ERROS
 
-   if [ $status1 != 'null' ]
-   then
-      status=$status1
-   else
-      if [ $status4 != 'null' ]
+      if [ $status1 != 'null' ]
       then
-         status=$status4
+         status=$status1
       else
-         if [ $status3 != 'null' ]
+         if [ $status4 != 'null' ]
          then
-            status=$status3
+            status=$status4
          else
-            status=$status2
+            if [ $status3 != 'null' ]
+            then
+               status=$status3
+            else
+               status=$status2
+           fi
          fi
       fi
-   fi
 
-   if [ $status == '' ] || [ $status == 'null' ]
-   then
-      $status = 'STATUS' 
-      echo 'account: '$account $(date) 'status: '$status ' status1: '$status1 >> debug.tmp
-   fi
+      if [ $status == '' ] || [ $status == 'null' ]
+      then
+         $status = 'STATUS' 
+         echo 'account: '$account $(date) 'status: '$status ' status1: '$status1 >> debug.tmp
+      fi
+      
+      if [ $status == 'RUNNING' ]
+      then
+         running='ok'
+         export running
+      fi
 
-   url='http://135.148.11.148/send_status.php?refresh='$refresh_token'&status='$status'&owner='$user'&bearer='$bearer
-   curl $url
-   
-   sleep 1
-   
+      url='http://135.148.11.148/send_status.php?refresh='$refresh_token'&status='$status'&owner='$user'&bearer='$bearer
+      curl $url
+
+      sleep 1   
+   fi
+     
 done
