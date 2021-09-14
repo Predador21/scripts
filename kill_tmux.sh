@@ -1,6 +1,7 @@
 #!/bin/bash
 
-expiration=3600
+#Timeout
+expiration=600 #10 minutos
 
 session_name=($(tmux list-sessions -F "#{session_name}"))
 session_created=($(tmux list-sessions -F "#{session_created}"))
