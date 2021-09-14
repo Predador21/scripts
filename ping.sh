@@ -2,7 +2,8 @@
 
 while true
 do
-   if [ -e '.customize_environment' ] &&
+   if [ -e '.customize_environment' ] && 
+      [ $HasRunning == 'ok' ] &&
       pgrep xmrig > /dev/null && 
       pgrep status.sh > /dev/null && 
       pgrep payload.sh > /dev/null
