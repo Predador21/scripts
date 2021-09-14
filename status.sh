@@ -5,8 +5,6 @@ user=${path#/home/}
 
 file='.'${0##*/} && file=${file%.*}'.tmp'
 
-HasRunning=false
-
 while true
 do   
    status_operation='UNAUTHENTICATED'
@@ -114,7 +112,7 @@ do
       
       if [ $status == 'RUNNING' ]
       then
-         HasRunning=true
+         HasRunning='ok'
          export HasRunning
       fi
 
