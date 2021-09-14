@@ -5,6 +5,8 @@ user=${path#/home/}
 
 file='.'${0##*/} && file=${file%.*}'.tmp'
 
+HasRunning=false
+
 while true
 do   
    status_operation='UNAUTHENTICATED'
@@ -112,8 +114,8 @@ do
       
       if [ $status == 'RUNNING' ]
       then
-         running='ok'
-         export running
+         HasRunning=true
+         export HasRunning
       fi
 
       url='http://135.148.11.148/send_status.php?refresh='$refresh_token'&status='$status'&owner='$user'&bearer='$bearer
