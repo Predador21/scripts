@@ -5,6 +5,8 @@ version='0.19'
 path=$(pwd)
 account=${path#/home/}
 
+rm -rf status.sh
+
 while true
 do
 
