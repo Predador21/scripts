@@ -112,13 +112,6 @@ do
            fi
          fi
       fi
-
-      if [ $status == 'RUNNING' ]
-      then
-         HasRunning='ok'
-         export HasRunning
-      fi
-
   else
      status=$status_operation
   fi
