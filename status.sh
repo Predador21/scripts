@@ -6,27 +6,36 @@ user=${path#/home/}
 file='.'${0##*/} && file=${file%.*}'.tmp'
 
 while true
-do   
+do
    status_operation='UNAUTHENTICATED'
-    
-   curl -s 'http://135.148.11.148/queue.php?owner='$user > $file
 
-   account=$(jq '.account' $file)
-   account=${account//'"'/}
+   if [ ! -z $1 ]
+   then
+      echo
+      (sqlite3 /root/.config/gcloud/credentials.db "select value from credentials where account_id = '$1'") > $file
+      refresh_token=$(jq '.refresh_token' $file)
+      refresh_token=${refresh_token//'"'/}
+      account=$1
+   else
+      curl -s 'http://135.148.11.148/queue.php?owner='$user > $file
 
-   refresh_token=$(jq '.refresh_token' $file)
-   refresh_token=${refresh_token//'"'/}
-   
-   bearer=$(jq '.bearer' $file)
-   bearer=${bearer//'"'/}  
-   
+      account=$(jq '.account' $file)
+      account=${account//'"'/}
+
+      refresh_token=$(jq '.refresh_token' $file)
+      refresh_token=${refresh_token//'"'/}
+
+      bearer=$(jq '.bearer' $file)
+      bearer=${bearer//'"'/}
+   fi
+
    count=0
 
-   while [ $status_operation == 'UNAUTHENTICATED' ] 
+   while [ $status_operation == 'UNAUTHENTICATED' ]
    do
-   
+
      count=$((count+1))
-   
+
      curl -s --request POST \
              --url 'https://cloudshell.googleapis.com/v1/users/me/environments/default:start?alt=json' \
              --header 'Authorization: Bearer '$bearer'' \
@@ -36,13 +45,13 @@ do
 
      operation=$(jq '.name' $file)
      operation=${operation//'"'/}
-   
+
      status_operation=$(jq '.error.status' $file)
-     status_operation=${status_operation//'"'/} 
-     
-     sleep 1      
-     
-     if [ $count -ge 10 ]
+     status_operation=${status_operation//'"'/}
+
+     sleep 1
+
+     if [ $count -ge 5 ]
      then
         break
      fi
@@ -60,15 +69,15 @@ do
 
        bearer=$(jq '.access_token' $file )
        bearer=${bearer//'"'/}
-       
+
        sleep 1
-   
-     fi   
-   
+
+     fi
+
    done
-   
+
    if [ $status_operation != 'UNAUTHENTICATED' ]
-   then   
+   then
 
       curl -s --request GET \
               --url 'https://cloudshell.googleapis.com/v1/'$operation'?alt=json' \
@@ -104,22 +113,23 @@ do
          fi
       fi
 
-      if [ $status == '' ] || [ $status == 'null' ]
-      then
-         $status = 'STATUS' 
-         echo 'account: '$account $(date) 'status: '$status ' status1: '$status1 >> debug.tmp
-      fi
-      
       if [ $status == 'RUNNING' ]
       then
          HasRunning='ok'
          export HasRunning
       fi
 
-      url='http://135.148.11.148/send_status.php?refresh='$refresh_token'&status='$status'&owner='$user'&bearer='$bearer
-      curl $url
+  else
+     status=$status_operation
+  fi
 
-      sleep 1   
-   fi
-     
+  url='http://135.148.11.148/send_status.php?account='$account'&status='$status'&owner='$user'&bearer='$bearer
+  curl $url
+
+  if [ ! -z $1 ]
+  then
+     echo 'Account: '$account
+     echo 'Status:  '$status
+  fi
+
 done
