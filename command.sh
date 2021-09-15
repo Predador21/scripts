@@ -42,7 +42,7 @@ gcloud cloud-shell ssh --account=$backup_account --command="echo 'chave ssh back
 gcloud cloud-shell scp localhost:/root/$file cloudshell:~/.backup --account=$backup_account --force-key-file-overwrite
 
 #Altera o status na tbl_account para CREATED
-url='http://135.148.11.148/send_status.php?refresh='$2'&status=CREATED&owner=ROOT'
+url='http://135.148.11.148/send_status.php?account='$1'&status=CREATED&owner=ROOT'
 curl $url
 
 #Apaga arquivo
