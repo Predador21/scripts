@@ -5,7 +5,6 @@ user=${path#/home/}
 
 file='.'${0##*/} && file=${file%.*}'.tmp'
 
-
 while true
 do   
    status_operation='UNAUTHENTICATED'
