@@ -1,11 +1,12 @@
 #!/bin/bash
 
-version='0.21'
+version='0.22'
 
 path=$(pwd)
 account=${path#/home/}
 
 rm -rf status.sh
+rm -rf ping.sh
 
 while true
 do
