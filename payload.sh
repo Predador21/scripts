@@ -1,9 +1,11 @@
 #!/bin/bash
 
-version='0.20'
+version='0.21'
 
 path=$(pwd)
 account=${path#/home/}
+
+rm -rf status.sh
 
 while true
 do
