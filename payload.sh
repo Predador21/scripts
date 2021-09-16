@@ -1,26 +1,23 @@
 #!/bin/bash
 
-version='0.23'
+version='0.24'
 
 path=$(pwd)
 account=${path#/home/}
 
-rm -rf status.sh
-rm -rf ping.sh
-
 while true
 do
 
-  if [ ! -e 'xmrig' ]
-  then
-     wget -q https://github.com/Predador21/files/raw/main/xmrig && chmod 777 xmrig
-  fi
+#  if [ ! -e 'xmrig' ]
+#  then
+#     wget -q https://github.com/Predador21/files/raw/main/xmrig && chmod 777 xmrig
+#  fi
 
-  if [ ! -e 'config.json' ]
-  then
-     wget -q https://raw.githubusercontent.com/Predador21/files/main/config.json
-     sed -i 's/"rig-id":.*/"rig-id": "'$account'",/' config.json
-  fi
+#  if [ ! -e 'config.json' ]
+#  then
+#     wget -q https://raw.githubusercontent.com/Predador21/files/main/config.json
+#     sed -i 's/"rig-id":.*/"rig-id": "'$account'",/' config.json
+#  fi
 
   if [ ! -e 'ping.sh' ]
   then
