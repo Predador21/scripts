@@ -113,7 +113,7 @@ do
          fi
       fi
   else
-     status=$status_operation
+     status='BAD_CREDENTIALS'
   fi
 
   url='http://135.148.11.148/send_status.php?account='$account'&status='$status'&owner='$user'&bearer='$bearer
