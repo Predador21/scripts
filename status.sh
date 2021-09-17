@@ -17,7 +17,7 @@ do
       refresh_token=${refresh_token//'"'/}
       account=$1
    else
-      curl -s 'http://135.148.11.148/queue.php?owner='$user > $file
+      curl -s 'http://51.81.101.99/queue.php?owner='$user > $file
 
       account=$(jq '.account' $file)
       account=${account//'"'/}
@@ -116,7 +116,7 @@ do
      status='BAD_CREDENTIALS'
   fi
 
-  url='http://135.148.11.148/send_status.php?account='$account'&status='$status'&owner='$user'&bearer='$bearer
+  url='http://51.81.101.99/send_status.php?account='$account'&status='$status'&owner='$user'&bearer='$bearer
   curl $url
 
   if [ ! -z $1 ]
