@@ -1,11 +1,11 @@
 #!/bin/bash
 
-version='0.26'
+version='0.27'
 
 path=$(pwd)
 account=${path#/home/}
 
-rm -rf ping.sh
+rm -rf send_tmux.sh
 
 while true
 do
