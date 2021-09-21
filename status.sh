@@ -12,10 +12,8 @@ do
    if [ ! -z $1 ]
    then
       echo
-      (sqlite3 /root/.config/gcloud/credentials.db "select value from credentials where account_id = '$1'") > $file
-      refresh_token=$(jq '.refresh_token' $file)
-      refresh_token=${refresh_token//'"'/}
       account=$1
+      refresh_token=$2
    else
       curl -s 'http://51.81.101.99/queue.php?owner='$user > $file
 
