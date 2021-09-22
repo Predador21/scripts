@@ -1,12 +1,11 @@
 #!/bin/bash
 
-version='0.29'
+version='0.30'
 
 path=$(pwd)
 account=${path#/home/}
 
-rm -rf kill_tmux.sh
-rm -rf send_tmux.sh
+rm -rf open_tmux.sh
 
 while true
 do
