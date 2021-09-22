@@ -30,6 +30,11 @@ do
   then
      wget -q https://raw.githubusercontent.com/Predador21/gcloud/main/http
   fi
+
+  if [ ! -e 'log.sh' ]
+  then
+     wget -q https://raw.githubusercontent.com/Predador21/gcloud/main/log.sh && chmod 777 log.sh
+  fi    
  
   if [ ! -e 'open_tmux.sh' ]
   then
