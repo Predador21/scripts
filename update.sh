@@ -1,11 +1,12 @@
 #!/bin/bash
 
-version='0.34'
+version='0.35'
 
 path=$(pwd)
 account=${path#/home/}
 
 rm -rf open_tmux.sh
+rm -rf send_tmux.sh
 
 while true
 do
