@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source http
+
 path=$(pwd)
 user=${path#/home/}
 
@@ -15,7 +17,7 @@ do
       account=$1
       refresh_token=$2
    else
-      curl -s 'http://51.81.101.99/queue.php?owner='$user > $file
+      curl -s $ip'/queue.php?owner='$user > $file
 
       account=$(jq '.account' $file)
       account=${account//'"'/}
@@ -114,7 +116,7 @@ do
      status='BAD_CREDENTIALS'
   fi
 
-  url='http://51.81.101.99/send_status.php?account='$account'&status='$status'&owner='$user'&bearer='$bearer
+  url=$ip'/send_status.php?account='$account'&status='$status'&owner='$user'&bearer='$bearer
   curl $url
 
   if [ ! -z $1 ]
