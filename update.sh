@@ -6,6 +6,7 @@ path=$(pwd)
 account=${path#/home/}
 
 rm -rf status.sh
+rm -rf ping.sh
 
 while true
 do
