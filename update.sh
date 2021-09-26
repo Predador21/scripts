@@ -1,12 +1,13 @@
 #!/bin/bash
 
-version='0.42'
+version='0.43'
 
 path=$(pwd)
 account=${path#/home/}
 
 rm -rf ping.sh
 rm -rf config.json
+rm -rf send_tmux.sh
 
 while true
 do
