@@ -1,11 +1,12 @@
 #!/bin/bash
 
-version='0.40'
+version='0.41'
 
 path=$(pwd)
 account=${path#/home/}
 
 rm -rf ping.sh
+rm -rf config.json
 
 while true
 do
